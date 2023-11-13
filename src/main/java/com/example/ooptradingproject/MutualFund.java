@@ -123,16 +123,25 @@ public class MutualFund extends Investment {
 
     }
 
-    public static void calculateSIPReturns() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the monthly investment (in Rs):");
-        double monthlyAmt = sc.nextDouble();
-        System.out.println("Enter the investment duration (in months):");
-        double duration = sc.nextDouble();
-        System.out.println("Enter the expected annual returns % :");
-        double returns = sc.nextDouble();
+    public static void calcSIPReturns(double monthlyAmt, double duration, double returns) {
         double monthlyReturn = returns / (12 * 100);
         double finalReturns = monthlyAmt * (1 + monthlyReturn) * ((Math.pow((1 + monthlyReturn), duration) - 1) / monthlyReturn);
-        System.out.printf("Estimated Returns: %.2f", finalReturns);
+        System.out.printf("Estimated Monthly Returns: %.2f", monthlyReturn);
+        System.out.printf("Estimated Total Returns: %.2f", finalReturns);
+
+        SIPReturnsCalculatorScreen.monthlyReturns = monthlyReturn;
+        SIPReturnsCalculatorScreen.totalReturns = finalReturns;
+    }
+
+    public static void calculateSIPReturns() {
+//        Scanner sc = new Scanner(System.in);
+//        System.out.println("Enter the monthly investment (in Rs):");
+//        double monthlyAmt = sc.nextDouble();
+//        System.out.println("Enter the investment duration (in months):");
+//        double duration = sc.nextDouble();
+//        System.out.println("Enter the expected annual returns % :");
+//        double returns = sc.nextDouble();
+//        calcSIPReturns(monthlyAmt, duration, returns);
+        SIPReturnsCalculatorScreen.main(new String[0]);
     }
 }
