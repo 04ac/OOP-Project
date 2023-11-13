@@ -2,26 +2,6 @@ package com.example.ooptradingproject;
 
 import java.util.*;
 
-abstract class Investment {
-    protected String name;
-    protected double price;
-    public Investment(String name, double price) {
-        this.name = name;
-        this.price = price;
-    }
-
-    // Abstract method to get the type of investment
-    public abstract String getInvestmentType();
-
-    // Getter methods
-    public String getName() {
-        return name;
-    }
-    public double getPrice() {
-        return price;
-    }
-}
-
 class Share extends Investment {
     public Share(String name, double price) {
         super(name, price);
@@ -199,6 +179,7 @@ class ShareMarketAccountSimulator {
                     throw new InsufficientFundsException("Insufficient budget to buy " + quantity + " units of " + i.getName());
                 }
                 else {
+                    i.setQuantityOwned(quantity);
                     userPortfolio.put(i, quantity);
                     userBudget -= cost;
                 }
@@ -212,7 +193,7 @@ class ShareMarketAccountSimulator {
         Random random = new Random();
         for (Investment i : investments) {
             double percentageChange = (random.nextDouble() - 0.5) * 0.2; // -10% to +10%
-            i.price = (1 + percentageChange)*i.price;
+            i.setSellingPrice(String.format("%.2f", (1 + percentageChange)*i.price));
         }
     }
 
@@ -222,21 +203,26 @@ class ShareMarketAccountSimulator {
         System.out.println("\nInvestments and their selling prices at closing time:");
         for (Investment i : investments) {
             int quantityOwned = userPortfolio.getOrDefault(i, 0);
-            double sellingPrice = i.getPrice();
-            double sellingValue = quantityOwned * sellingPrice;
+            String sellingPrice = i.getSellingPrice();
+            double sellingValue = quantityOwned * Double.parseDouble(sellingPrice);
             totalSellValue = totalSellValue + sellingValue ;
-            //System.out.println(i.getInvestmentType() + ": " + i.getName() + " - Quantity: " + quantityOwned + ", Selling Price: Rs" + sellingPrice);
-            System.out.printf("%s: %s - Quantity: %d,\tSelling Price: Rs%.2f, Total Amt: Rs%.2f\n",i.getInvestmentType(),i.getName(),quantityOwned,sellingPrice,sellingValue);
+//            String n = i.getInvestmentType() + ": " + i.getName() + " - Quantity: " + quantityOwned + ", Selling Price: Rs" + sellingPrice + "\n";
+//            String n = String.format("%s - Quantity: %d, Selling Price: Rs%.2f, Total Amt: Rs%.2f\n"/*,i.getInvestmentType()*/,i.getName(),quantityOwned,sellingPrice,sellingValue);
+//            DayTradingResultsScreen.results.add(n);
+            i.setSellingValue(String.format("%.2f", sellingValue));
+            DayTradingResultsScreen.invList.add(i);
         }
 
         userBudget = userBudget + totalSellValue;  // Update user budget with total sell value
         System.out.printf("Capital Left: %.2f\n",userBudget);
         double totalProfitLoss = userBudget - 10000;
         if(totalProfitLoss >=0){
-            System.out.printf("Total Profit: %.2f",totalProfitLoss);
+            DayTradingResultsScreen.totalProfitLoss = String.format("Total Profit: %.2f",totalProfitLoss);
         }else{
-            System.out.printf("Total Loss: %.2f",totalProfitLoss);
+            DayTradingResultsScreen.totalProfitLoss = String.format("Total Loss: %.2f",totalProfitLoss);
         }
+
+        DayTradingResultsScreen.main(new String[0]);
     }
     public void runSimulation() {
         printInvestments();
