@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ooptradingproject.DayTradingScreen">
+   <children>
+      <Label layoutX="38.0" layoutY="37.0" text="Available Capital:">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label id="capitalLabelID" layoutX="220.0" layoutY="37.0" prefHeight="32.0" prefWidth="97.0" text="10000" textFill="#18c71b">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <TableView fx:id="DayTradingTableViewID" layoutX="38.0" layoutY="85.0" prefHeight="229.0" prefWidth="535.0">
+        <columns>
+          <TableColumn fx:id="stockTypeColID" prefWidth="75.0" text="Type" />
+          <TableColumn fx:id="nameTableColumnID" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="priceColumnID" prefWidth="75.0" text="Price" />
+        </columns>
+      </TableView>
+      <Button fx:id="finalizeBtnId" layoutX="254.0" layoutY="334.0" mnemonicParsing="false" text="Finalize" />
+   </children>
+</AnchorPane>
