@@ -1,5 +1,6 @@
-package com.example.ooptradingproject;
+package com.example.ooptradingproject.screens;
 
+import com.example.ooptradingproject.models.Investment;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,7 +24,7 @@ public class DayTradingResultsScreen extends Application {
         launch(args);
     }
 
-    public void start(Stage stage) {
+    public static void display(Stage stage) {
         FlowPane fp = new FlowPane(20, 20);
         Scene scene = new Scene(fp, 720, 480);
         stage.setTitle("Trading Simulator");
@@ -48,6 +49,11 @@ public class DayTradingResultsScreen extends Application {
         nameCol.setCellValueFactory(
                 new PropertyValueFactory<>("name"));
 
+        TableColumn<Investment, String> invTypeCol =
+                new TableColumn<>("Investment Type");
+        invTypeCol.setCellValueFactory(
+                new PropertyValueFactory<>("investmentType"));
+
         TableColumn<Investment, Double> buyingPriceCol =
                 new TableColumn<>("Buying Price");
         buyingPriceCol.setCellValueFactory(
@@ -69,7 +75,7 @@ public class DayTradingResultsScreen extends Application {
         sellValueCol.setCellValueFactory(
                 new PropertyValueFactory<>("sellingValue"));
 
-        tableView.getColumns().addAll(nameCol, buyingPriceCol, sellpriceCol, qtyOwnedCol, sellValueCol);
+        tableView.getColumns().addAll(nameCol, invTypeCol, buyingPriceCol, sellpriceCol, qtyOwnedCol, sellValueCol);
         tableView.getItems().addAll(invList);
         tableView.setPlaceholder(
                 new Label("No rows to display"));
@@ -78,5 +84,9 @@ public class DayTradingResultsScreen extends Application {
         fp.getChildren().addAll(dayTradingResultsLbl, tableView, totalProfitOrLossLbl);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void start(Stage stage) {
+        display(stage);
     }
 }

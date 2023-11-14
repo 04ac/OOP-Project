@@ -1,5 +1,7 @@
-package com.example.ooptradingproject;
+package com.example.ooptradingproject.screens;
 
+import com.example.ooptradingproject.models.MutualFund;
+import com.example.ooptradingproject.utils.Spacer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,6 +14,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class SIPReturnsCalculatorScreen extends Application {
@@ -22,8 +25,7 @@ public class SIPReturnsCalculatorScreen extends Application {
         launch(args);
     }
 
-    @Override
-    public void start(Stage stage) {
+    public static void displaySIPScreen(Stage stage) {
         FlowPane fp = new FlowPane(20, 20);
         Scene scene = new Scene(fp, 720, 480);
         stage.setTitle("Trading Simulator");
@@ -58,15 +60,13 @@ public class SIPReturnsCalculatorScreen extends Application {
 
         Button calcRetBtn = new Button("Calculate Returns");
 
-        Label monthlyReturnsLbl = new Label();
-        monthlyReturnsLbl.setTextFill(Color.CADETBLUE);
-        monthlyReturnsLbl.setFont(new Font(20));
         Label totalReturnsLbl = new Label();
         totalReturnsLbl.setTextFill(Color.GREEN);
         totalReturnsLbl.setFont(new Font(25));
+        totalReturnsLbl.setTextAlignment(TextAlignment.CENTER);
 
-        fp.getChildren().addAll(dayTradingResultsLbl, l1, monthlyAmtTextField, p1, l2, durationTextField, p2, l3,
-                returnsTextField, p3, calcRetBtn, monthlyReturnsLbl, p4, totalReturnsLbl);
+        fp.getChildren().addAll(dayTradingResultsLbl, l1, monthlyAmtTextField, Spacer.getSpacer(), l2, durationTextField, Spacer.getSpacer(), l3,
+                returnsTextField, Spacer.getSpacer(), calcRetBtn, Spacer.getSpacer(), totalReturnsLbl);
         fp.setAlignment(Pos.TOP_CENTER);
 
         calcRetBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -76,13 +76,17 @@ public class SIPReturnsCalculatorScreen extends Application {
                         Double.parseDouble(durationTextField.getText()),
                         Double.parseDouble(returnsTextField.getText()));
 
-                monthlyReturnsLbl.setText(String.format("Estimated Monthly returns: %.2f", monthlyReturns));
-                totalReturnsLbl.setText(String.format("Estimated total returns over a period of %d months:  Rs. %.2f",
+                totalReturnsLbl.setText(String.format("Estimated total returns over a period of %d months:\nRs. %.2f",
                         Integer.parseInt(durationTextField.getText()), totalReturns));
             }
         });
 
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        displaySIPScreen(stage);
     }
 }

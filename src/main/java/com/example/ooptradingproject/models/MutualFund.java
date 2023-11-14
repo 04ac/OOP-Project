@@ -1,6 +1,9 @@
-package com.example.ooptradingproject;
+package com.example.ooptradingproject.models;
 
-import java.util.Scanner;
+import com.example.ooptradingproject.screens.MutualFundRecommendationScreen;
+import com.example.ooptradingproject.screens.SIPReturnsCalculatorScreen;
+import com.example.ooptradingproject.utils.SceneSwitcher;
+import javafx.event.ActionEvent;
 
 public class MutualFund extends Investment {
     private final double averageMonthlyGain;
@@ -54,54 +57,21 @@ public class MutualFund extends Investment {
     }
 
     public static void initializeFunds() {
-        funds = new MutualFund[5];
-        funds[0] = new MutualFund("ICICI NASDAQ100", 10000, 2, "High", "Index Fund", "Short");
-        funds[1] = new MutualFund("ICICI NIFTY50", 500, 1.5, "Medium", "Index Fund", "Long");
-        funds[2] = new MutualFund("Quant SmallCap", 1000, 3, "High", "Active Fund", "Short");
-        funds[3] = new MutualFund("SBI Debt Fund", 100, 0.5, "Low", "Debt Fund", "Long");
-        funds[4] = new MutualFund("SBI Gold Fund", 1500, 1, "Low", "Gold Fund", "Long");
+        funds = new MutualFund[10];
+        funds[0]= new MutualFund("ICICI NASDAQ100",1200,2.14,"High","Index Fund","Long");
+        funds[1]= new MutualFund("ICICI NIFTY50",132.22,1.52,"Medium","Index Fund","Long");
+        funds[2]= new MutualFund("Quant SmallCap",1000,3.2,"High","Active Fund","Short");
+        funds[3]= new MutualFund("SBI Debt Fund",100,0.5,"Low","Debt Fund","Long");
+        funds[4]= new MutualFund("SBI Gold Fund",1500,0.9,"Low","Gold Fund","Long");
+        funds[5]= new MutualFund("Tata Digital Fund",750,1.63,"High","Active Fund","Short");
+        funds[6]= new MutualFund("Axis Equity Fund",3500,1,"High","Active Fund","Long");
+        funds[7]= new MutualFund("Quant Tax Saver Fund",6500,1.36,"Medium","ELSS Fund","Long");
+        funds[8]= new MutualFund("Tata ELSS Fund",3500,1.8,"Medium","ELSS Fund","Short");
+        funds[9]= new MutualFund("ICICI Commodities Fund",320.2,1,"Low","Commodities Fund","Long");
     }
 
-    public static void recommendFund() {
+    public static void recommendFund(ActionEvent event, double investmentAmt, String risk, String time) {
         MutualFund.initializeFunds();
-        Scanner sc = new Scanner(System.in);
-        String risk;
-        String time;
-        System.out.println("Enter Investment Amount:");
-        double investmentAmt = sc.nextDouble();
-
-        while (true) {
-            System.out.println("Enter Risk Tolerance:");
-            System.out.println("1.Low\t2.Medium\t3.High");
-            int investmentRisk = sc.nextInt(); //1->Low, 2->Medium, 3->High
-            if (investmentRisk == 1) {
-                risk = "Low";
-                break;
-            } else if (investmentRisk == 2) {
-                risk = "Medium";
-                break;
-            } else if (investmentRisk == 3) {
-                risk = "High";
-                break;
-            } else {
-                System.out.println("Please enter valid input");
-            }
-        }
-
-        while (true) {
-            System.out.println("Enter Investment Horizon:");
-            System.out.println("1.Short Term\t2.Long Term");
-            int investmentTime = sc.nextInt(); //1->Short, 2->Long
-            if (investmentTime == 1) {
-                time = "Short";
-                break;
-            } else if (investmentTime == 2) {
-                time = "Long";
-                break;
-            } else {
-                System.out.println("Please enter valid input");
-            }
-        }
         int isRecommendedFlag = 0;
         for (MutualFund m : MutualFund.funds) {
             if (m.getPrice() > investmentAmt) {
@@ -119,9 +89,8 @@ public class MutualFund extends Investment {
         if (isRecommendedFlag == 0) {
             System.out.println("No funds found at the moment. Please Try again with different inputs...");
         }
-        MutualFundRecommendationScreen.main(new String[0]);
-
-    }
+        MutualFundRecommendationScreen.displayScene(SceneSwitcher.getStage(event));
+}
 
     public static void calcSIPReturns(double monthlyAmt, double duration, double returns) {
         double monthlyReturn = returns / (12 * 100);
@@ -133,15 +102,7 @@ public class MutualFund extends Investment {
         SIPReturnsCalculatorScreen.totalReturns = finalReturns;
     }
 
-    public static void calculateSIPReturns() {
-//        Scanner sc = new Scanner(System.in);
-//        System.out.println("Enter the monthly investment (in Rs):");
-//        double monthlyAmt = sc.nextDouble();
-//        System.out.println("Enter the investment duration (in months):");
-//        double duration = sc.nextDouble();
-//        System.out.println("Enter the expected annual returns % :");
-//        double returns = sc.nextDouble();
-//        calcSIPReturns(monthlyAmt, duration, returns);
-        SIPReturnsCalculatorScreen.main(new String[0]);
+    public static void calculateSIPReturns(ActionEvent event) {
+        SIPReturnsCalculatorScreen.displaySIPScreen(SceneSwitcher.getStage(event));
     }
 }

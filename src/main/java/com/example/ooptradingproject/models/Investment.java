@@ -1,7 +1,11 @@
-package com.example.ooptradingproject;
+package com.example.ooptradingproject.models;
 
 public abstract class Investment {
     public String name;
+    public double price;
+    public String sellingPrice;
+    public String sellingValue;
+    public int quantityOwned;
 
     public double getPrice() {
         return price;
@@ -11,12 +15,6 @@ public abstract class Investment {
         this.price = price;
     }
 
-    public double price;
-    public String sellingPrice;
-    public String sellingValue;
-    public int quantityOwned;
-
-
     public int getQuantityOwned() {
         return quantityOwned;
     }
@@ -25,8 +23,6 @@ public abstract class Investment {
         this.quantityOwned = quantityOwned;
     }
 
-
-
     public String getSellingPrice() {
         return sellingPrice;
     }
@@ -34,8 +30,6 @@ public abstract class Investment {
     public String getSellingValue() {
         return sellingValue;
     }
-
-
 
     public void setSellingPrice(String sellingPrice) {
         this.sellingPrice = sellingPrice;
@@ -57,8 +51,6 @@ public abstract class Investment {
     public String getName() {
         return name;
     }
-
-
     public String getFormattedPrice() {
         return String.format("%.2f", price);
     }

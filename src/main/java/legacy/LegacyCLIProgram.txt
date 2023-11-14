@@ -1,0 +1,160 @@
+Trade Class:
+
+public class Trade extends Application {
+    public static void main(String[] args) {
+        launch(args);
+//        Scanner sc = new Scanner(System.in);
+//
+//        while (true) {
+//            System.out.println("\nMenu:");
+//            System.out.println("1. Run Day Trading Simulator");
+//            System.out.println("2. Get Mutual Fund Recommendations");
+//            System.out.println("3. SIP Returns Calculator");
+//            System.out.println("4. Exit");
+//            System.out.print("Enter your choice: ");
+//            int choice = sc.nextInt();
+//
+//            switch (choice) {
+//                case 1:
+//                    ShareMarketAccountSimulator simulator = new ShareMarketAccountSimulator();
+//                    simulator.runSimulation();
+//                    break;
+//                case 2:
+//                    MutualFund.recommendFund();
+//                    break;
+//                case 3:
+//                    MutualFund.calculateSIPReturns();
+//                    break;
+//                case 4:
+//                    System.out.println("Exiting");
+//                    System.exit(0);
+//                    break;
+//                default:
+//                    System.out.println("Invalid choice");
+//            }
+//        }
+    }
+
+
+
+    //            String n = i.getInvestmentType() + ": " + i.getName() + " - Quantity: " + quantityOwned + ", Selling Price: Rs" + sellingPrice + "\n";
+    //            String n = String.format("%s - Quantity: %d, Selling Price: Rs%.2f, Total Amt: Rs%.2f\n"/*,i.getInvestmentType()*/,i.getName(),quantityOwned,sellingPrice,sellingValue);
+    //            DayTradingResultsScreen.results.add(n);
+
+
+private void printInvestments() {
+        System.out.printf("Capital Available:\tRs%.2f\n",userBudget);
+        System.out.println("Investments available Today:");
+        for (Investment i : investments) {
+            System.out.printf("%s: %s - Rs%.2f\n",i.getInvestmentType() , i.getName() , i.getPrice());
+        }
+    }
+
+
+private void buyInvestments() {
+//        Scanner scanner = new Scanner(System.in);
+        for (Investment i : DayTradingEnterInputScreen.invList) {
+            try {
+//                System.out.print("Enter the quantity of " + i.getName() + " to buy: ");
+                int quantity = i.getQuantityOwned();
+                double cost = quantity * i.getPrice();
+
+                if (cost > userBudget) {
+                    throw new InsufficientFundsException("Insufficient budget to buy " + quantity + " units of " + i.getName());
+                }
+                else {
+//                    i.setQuantityOwned(quantity);
+                    userPortfolio.put(i, quantity);
+                    userBudget -= cost;
+                }
+            } catch (InsufficientFundsException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+
+
+    public static void recommendFund(ActionEvent event, double investmentAmt, String risk, String time) {
+            MutualFund.initializeFunds();
+    //        Scanner sc = new Scanner(System.in);
+    //        String risk;
+    //        String time;
+    //        System.out.println("Enter Investment Amount:");
+    //        double investmentAmt = sc.nextDouble();
+    //
+    //        while (true) {
+    //            System.out.println("Enter Risk Tolerance:");
+    //            System.out.println("1.Low\t2.Medium\t3.High");
+    //            int investmentRisk = sc.nextInt(); //1->Low, 2->Medium, 3->High
+    //            if (investmentRisk == 1) {
+    //                risk = "Low";
+    //                break;
+    //            } else if (investmentRisk == 2) {
+    //                risk = "Medium";
+    //                break;
+    //            } else if (investmentRisk == 3) {
+    //                risk = "High";
+    //                break;
+    //            } else {
+    //                System.out.println("Please enter valid input");
+    //            }
+    //        }
+    //
+    //        while (true) {
+    //            System.out.println("Enter Investment Horizon:");
+    //            System.out.println("1.Short Term\t2.Long Term");
+    //            int investmentTime = sc.nextInt(); //1->Short, 2->Long
+    //            if (investmentTime == 1) {
+    //                time = "Short";
+    //                break;
+    //            } else if (investmentTime == 2) {
+    //                time = "Long";
+    //                break;
+    //            } else {
+    //                System.out.println("Please enter valid input");
+    //            }
+    //        }
+            int isRecommendedFlag = 0;
+            for (MutualFund m : MutualFund.funds) {
+                if (m.getPrice() > investmentAmt) {
+                    continue;
+                } else if (!(risk.equals(m.getRisk()))) {
+                    continue;
+                } else if (!(time.equals(m.getInvestmentHorizon()))) {
+                    continue;
+                } else {
+                    isRecommendedFlag = 1;
+                    MutualFund.printFund(m);
+                    MutualFundRecommendationScreen.mutualFundObservableList.add(m);
+                }
+            }
+            if (isRecommendedFlag == 0) {
+                System.out.println("No funds found at the moment. Please Try again with different inputs...");
+            }
+    //        MutualFundRecommendationScreen.main(new String[0]);
+            MutualFundRecommendationScreen.displayScene(SceneSwitcher.getStage(event));
+    }
+
+
+    public static void calcSIPReturns(double monthlyAmt, double duration, double returns) {
+            double monthlyReturn = returns / (12 * 100);
+            double finalReturns = monthlyAmt * (1 + monthlyReturn) * ((Math.pow((1 + monthlyReturn), duration) - 1) / monthlyReturn);
+            System.out.printf("Estimated Monthly Returns: %.2f", monthlyReturn);
+            System.out.printf("Estimated Total Returns: %.2f", finalReturns);
+
+            SIPReturnsCalculatorScreen.monthlyReturns = monthlyReturn;
+            SIPReturnsCalculatorScreen.totalReturns = finalReturns;
+        }
+
+        public static void calculateSIPReturns(ActionEvent event) {
+    //        Scanner sc = new Scanner(System.in);
+    //        System.out.println("Enter the monthly investment (in Rs):");
+    //        double monthlyAmt = sc.nextDouble();
+    //        System.out.println("Enter the investment duration (in months):");
+    //        double duration = sc.nextDouble();
+    //        System.out.println("Enter the expected annual returns % :");
+    //        double returns = sc.nextDouble();
+    //        calcSIPReturns(monthlyAmt, duration, returns);
+            SIPReturnsCalculatorScreen.displaySIPScreen(SceneSwitcher.getStage(event));
+        }

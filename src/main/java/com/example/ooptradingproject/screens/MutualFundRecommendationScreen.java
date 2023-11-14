@@ -1,5 +1,6 @@
-package com.example.ooptradingproject;
+package com.example.ooptradingproject.screens;
 
+import com.example.ooptradingproject.models.MutualFund;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +21,60 @@ public class MutualFundRecommendationScreen extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static void displayScene(Stage stage) {
+        FlowPane fp = new FlowPane(20, 20);
+        Scene scene = new Scene(fp, 720, 480);
+        stage.setTitle("Trading Simulator");
+
+        Label dayTradingResultsLbl = new Label("Mutual Fund Recommendations!");
+        dayTradingResultsLbl.setAlignment(Pos.TOP_CENTER);
+        dayTradingResultsLbl.setTextFill(Color.PALEVIOLETRED);
+        dayTradingResultsLbl.setFont(new Font(40));
+
+
+        TableView<MutualFund> tableView = new TableView<>();
+        tableView.setPrefSize(600, 300);
+
+        TableColumn<MutualFund, String> nameCol =
+                new TableColumn<>("Name");
+        nameCol.setCellValueFactory(
+                new PropertyValueFactory<>("name"));
+
+        TableColumn<MutualFund, Double> fundTypeCol =
+                new TableColumn<>("Fund Type");
+        fundTypeCol.setCellValueFactory(
+                new PropertyValueFactory<>("fundType"));
+
+        TableColumn<MutualFund, Integer> priceCol =
+                new TableColumn<>("Price");
+        priceCol.setCellValueFactory(
+                new PropertyValueFactory<>("price"));
+
+        TableColumn<MutualFund, String> averageMonthlyGainCol =
+                new TableColumn<>("Average Monthly Gain %");
+        averageMonthlyGainCol.setCellValueFactory(
+                new PropertyValueFactory<>("averageMonthlyGain"));
+
+        TableColumn<MutualFund, String> riskLvlCol =
+                new TableColumn<>("Risk Level");
+        riskLvlCol.setCellValueFactory(
+                new PropertyValueFactory<>("risk"));
+
+        TableColumn<MutualFund, String> idealInvestmentDurationCol =
+                new TableColumn<>("Ideal Investment Duration");
+        idealInvestmentDurationCol.setCellValueFactory(
+                new PropertyValueFactory<>("investmentHorizon"));
+
+        tableView.getColumns().addAll(nameCol, fundTypeCol, priceCol, riskLvlCol, averageMonthlyGainCol, idealInvestmentDurationCol);
+        tableView.getItems().addAll(mutualFundObservableList);
+        tableView.setPlaceholder(
+                new Label("No rows to display"));
+
+        fp.setAlignment(Pos.CENTER);
+        fp.getChildren().addAll(dayTradingResultsLbl, tableView);
+        stage.setScene(scene);
     }
 
     @Override
