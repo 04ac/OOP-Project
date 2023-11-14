@@ -71,9 +71,9 @@ public class FillMutualFundPreferencesScreen extends Application {
             public void handle(ActionEvent event) {
                 int selectedIdx = invHorizonCB.getSelectionModel().getSelectedIndex();
                 if (selectedIdx == 0) {
-                    time = "Short Term";
+                    time = "Short";
                 } else if (selectedIdx == 1) {
-                    time = "Long Term";
+                    time = "Long";
                 }
             }
         });
