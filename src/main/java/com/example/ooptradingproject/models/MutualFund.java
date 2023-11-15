@@ -46,14 +46,15 @@ public class MutualFund extends Investment {
         return fundType;
     }
 
-    public static void printFund(MutualFund m) {
-        System.out.println("Name: \t" + m.getName());
-        System.out.println("Fund Type:" + m.getFundType());
-        System.out.println("Price: \t" + m.getPrice());
-        System.out.println("Average Monthly Gain: " + m.getAverageMonthlyGain() + "%");
-        System.out.println("Risk Level:" + m.getRisk());
-        System.out.println("Ideal investment Duration:" + m.getInvestmentHorizon());
-        System.out.println();
+    @Override
+    public String toString(){
+        System.out.println("Name:     " +this.getName());
+        System.out.println("Fund Type:" +this.getFundType());
+        System.out.println("Price:    " +this.getPrice());
+        System.out.println("Risk Level:"+this.getRisk());
+        System.out.println("Avg Monthly Gain: " +this.getAverageMonthlyGain()+"%");
+        System.out.println("Ideal investment Duration:" +this.getInvestmentHorizon());
+        return "";
     }
 
     public static void initializeFunds() {
@@ -82,7 +83,7 @@ public class MutualFund extends Investment {
                 continue;
             } else {
                 isRecommendedFlag = 1;
-                MutualFund.printFund(m);
+                System.out.println(m);
                 MutualFundRecommendationScreen.mutualFundObservableList.add(m);
             }
         }

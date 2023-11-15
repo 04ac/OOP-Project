@@ -42,7 +42,10 @@ public class DayTradingEnterInputScreen extends Application {
         dayTradingLbl.setAlignment(Pos.TOP_CENTER);
         dayTradingLbl.setTextFill(Color.PALEVIOLETRED);
 
-        Label funds = new Label("Funds Available: " + MAX_FUNDS);
+        Label funds = new Label("Max. amount available for investment: Rs. " + MAX_FUNDS);
+        funds.setFont(new Font(20));
+        funds.setAlignment(Pos.TOP_CENTER);
+        funds.setTextFill(Color.BLUEVIOLET);
 
         TableView<Investment> tableView = new TableView<>();
         tableView.setEditable(true);
@@ -90,7 +93,7 @@ public class DayTradingEnterInputScreen extends Application {
                 new Label("No rows to display"));
 
         fp.setAlignment(Pos.CENTER);
-        fp.getChildren().addAll(dayTradingLbl, Spacer.getSpacer(), tableView, l2, Spacer.getSpacer(), submitQtyBtn);
+        fp.getChildren().addAll(dayTradingLbl, Spacer.getSpacer(), funds, tableView, l2, Spacer.getSpacer(), submitQtyBtn);
         stage.setScene(scene);
         stage.show();
     }
