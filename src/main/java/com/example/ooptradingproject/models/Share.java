@@ -11,4 +11,9 @@ public class Share extends Investment {
     public String getInvestmentType() {
         return "Stock";
     }
+
+    @Override
+    public String toString() {
+        return String.format("Investment type: %s\nName: %s\nPrice: %.2f", getInvestmentType(), getName(), getPrice());
+    }
 }

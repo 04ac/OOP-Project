@@ -48,6 +48,7 @@ public class MutualFund extends Investment {
 
     @Override
     public String toString(){
+        System.out.println("Investment type: " + getInvestmentType());
         System.out.println("Name:     " +this.getName());
         System.out.println("Fund Type:" +this.getFundType());
         System.out.println("Price:    " +this.getPrice());
