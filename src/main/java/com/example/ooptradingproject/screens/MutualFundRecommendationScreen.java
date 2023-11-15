@@ -70,7 +70,7 @@ public class MutualFundRecommendationScreen extends Application {
         tableView.getColumns().addAll(nameCol, fundTypeCol, priceCol, riskLvlCol, averageMonthlyGainCol, idealInvestmentDurationCol);
         tableView.getItems().addAll(mutualFundObservableList);
         tableView.setPlaceholder(
-                new Label("No rows to display"));
+                new Label("No funds found at the moment. Please Try again with different inputs..."));
 
         fp.setAlignment(Pos.CENTER);
         fp.getChildren().addAll(dayTradingResultsLbl, tableView);
