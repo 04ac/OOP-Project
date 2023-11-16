@@ -64,7 +64,7 @@ public class ShareMarketAccountSimulator {
         Random random = new Random();
         for (Investment i : investments) {
             double percentageChange = (random.nextDouble() - 0.5) * 0.2; // -10% to +10%
-            i.setSellingPrice(String.format("%.2f", (1 + percentageChange) * i.price));
+            i.setSellingPrice(String.format("%.2f", (1 + percentageChange) * i.getPrice()));
         }
     }
 

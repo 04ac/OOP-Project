@@ -1,11 +1,11 @@
 package com.example.ooptradingproject.models;
 
 public abstract class Investment {
-    public String name;
-    public double price;
-    public String sellingPrice;
-    public String sellingValue;
-    public int quantityOwned;
+    protected String name;
+    protected double price;
+    protected String sellingPrice;
+    protected String sellingValue;
+    protected int quantityOwned;
 
     public double getPrice() {
         return price;
