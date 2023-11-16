@@ -22,6 +22,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 
+import static com.example.ooptradingproject.utils.Constants.APP_NAME;
 import static com.example.ooptradingproject.utils.Constants.MAX_FUNDS;
 
 public class DayTradingEnterInputScreen extends Application {
@@ -35,7 +36,7 @@ public class DayTradingEnterInputScreen extends Application {
     public static void display(Stage stage, ShareMarketAccountSimulator simulator) {
         FlowPane fp = new FlowPane(20, 20);
         Scene scene = new Scene(fp, 720, 480);
-        stage.setTitle("Trading Simulator");
+        stage.setTitle(APP_NAME);
 
         Label dayTradingLbl = new Label("Day Trading");
         dayTradingLbl.setFont(new Font(40));

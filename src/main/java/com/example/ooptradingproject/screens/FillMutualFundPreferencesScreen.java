@@ -16,6 +16,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import static com.example.ooptradingproject.utils.Constants.APP_NAME;
+
 public class FillMutualFundPreferencesScreen extends Application {
 
     private static String risk;
@@ -28,7 +30,7 @@ public class FillMutualFundPreferencesScreen extends Application {
     public static void displayFillMFPrefsScreen(Stage stage) {
         FlowPane fp = new FlowPane(20, 20);
         Scene scene = new Scene(fp, 720, 480);
-        stage.setTitle("Trading Simulator");
+        stage.setTitle(APP_NAME);
 
         Label mutualFundPreferencesLabel = new Label("Your Preferences:");
         mutualFundPreferencesLabel.setAlignment(Pos.TOP_CENTER);

@@ -17,6 +17,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import static com.example.ooptradingproject.utils.Constants.APP_NAME;
+
 public class SIPReturnsCalculatorScreen extends Application {
     public static double monthlyReturns;
     public static double totalReturns;
@@ -28,16 +30,7 @@ public class SIPReturnsCalculatorScreen extends Application {
     public static void displaySIPScreen(Stage stage) {
         FlowPane fp = new FlowPane(20, 20);
         Scene scene = new Scene(fp, 720, 480);
-        stage.setTitle("Trading Simulator");
-
-        Region p1 = new Region();
-        p1.setPrefSize(Double.MAX_VALUE, 0.0);
-        Region p2 = new Region();
-        p2.setPrefSize(Double.MAX_VALUE, 0.0);
-        Region p3 = new Region();
-        p3.setPrefSize(Double.MAX_VALUE, 0.0);
-        Region p4 = new Region();
-        p4.setPrefSize(Double.MAX_VALUE, 0.0);
+        stage.setTitle(APP_NAME);
 
         Label dayTradingResultsLbl = new Label("SIP Returns Calculator!");
         dayTradingResultsLbl.setAlignment(Pos.TOP_LEFT);

@@ -15,6 +15,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import static com.example.ooptradingproject.utils.Constants.APP_NAME;
+
 public class MutualFundRecommendationScreen extends Application {
 
     public static ObservableList<MutualFund> mutualFundObservableList = FXCollections.observableArrayList();
@@ -26,7 +28,7 @@ public class MutualFundRecommendationScreen extends Application {
     public static void displayScene(Stage stage) {
         FlowPane fp = new FlowPane(20, 20);
         Scene scene = new Scene(fp, 720, 480);
-        stage.setTitle("Trading Simulator");
+        stage.setTitle(APP_NAME);
 
         Label dayTradingResultsLbl = new Label("Mutual Fund Recommendations!");
         dayTradingResultsLbl.setAlignment(Pos.TOP_CENTER);

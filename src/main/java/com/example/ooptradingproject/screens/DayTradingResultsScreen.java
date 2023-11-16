@@ -15,6 +15,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import static com.example.ooptradingproject.utils.Constants.APP_NAME;
+
 public class DayTradingResultsScreen extends Application {
 
     public static String totalProfitLoss;
@@ -27,7 +29,7 @@ public class DayTradingResultsScreen extends Application {
     public static void display(Stage stage) {
         FlowPane fp = new FlowPane(20, 20);
         Scene scene = new Scene(fp, 720, 480);
-        stage.setTitle("Trading Simulator");
+        stage.setTitle(APP_NAME);
 
         Label dayTradingResultsLbl = new Label("Day Trading Results");
         dayTradingResultsLbl.setAlignment(Pos.TOP_CENTER);
